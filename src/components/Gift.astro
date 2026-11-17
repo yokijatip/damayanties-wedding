@@ -1,0 +1,28 @@
+---
+import { invite } from '../config.js';
+---
+<section>
+  <h2>Hadiah pernikahan</h2>
+  <p class="small">Doa restu Anda sudah cukup bagi kami. Bila ingin berbagi kebahagiaan, silakan melalui rekening berikut.</p>
+  {invite.accounts.map((a) => (
+    <div class="acct">
+      <div><b>{a.bank} · {a.number}</b><span class="small">a.n. {a.name}</span></div>
+      <button class="btn" data-copy={a.number}>Salin</button>
+    </div>
+  ))}
+</section>
+
+<script>
+  const toast = (t) => {
+    const e = document.getElementById('toast');
+    e.textContent = t;
+    e.classList.add('show');
+    setTimeout(() => e.classList.remove('show'), 1800);
+  };
+  document.querySelectorAll('[data-copy]').forEach((b) =>
+    b.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(b.dataset.copy); toast('Nomor tersalin'); }
+      catch { toast('Gagal menyalin, salin manual'); }
+    })
+  );
+</script>

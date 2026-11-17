@@ -1,0 +1,23 @@
+---
+import '../styles/global.css';
+import { invite } from '../config.js';
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`The Wedding of ${invite.short}`} />
+    <meta property="og:description" content={`Kami mengundang Anda ke pernikahan kami · ${invite.dateLabel}`} />
+    <meta property="og:image" content={`${invite.siteUrl}/og.jpg`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Special+Elite&family=Caveat:wght@500&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <slot />
+    <div class="toast" id="toast" role="status"></div>
+  </body>
+</html>

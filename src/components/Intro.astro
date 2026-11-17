@@ -1,0 +1,11 @@
+---
+import { invite } from '../config.js';
+---
+<section>
+  <p class="small">“{invite.ayat}”</p>
+  <p class="small">{invite.ayatRef}</p>
+  <hr class="rule" />
+  <div class="polaroid" style="transform:rotate(2deg);margin-top:20px;width:80%">
+    <span class="tape"></span><img src={invite.photos[0]} alt="Foto berdua" />
+  </div>
+</section>

@@ -1,0 +1,11 @@
+---
+import { invite } from '../config.js';
+---
+<section>
+  <h2>Galeri</h2>
+  <div class="gal">
+    {invite.photos.map((src, i) => (
+      <div class="polaroid"><span class="tape"></span><img src={src} alt={`Foto ${i + 1}`} loading="lazy" /></div>
+    ))}
+  </div>
+</section>

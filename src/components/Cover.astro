@@ -1,0 +1,30 @@
+---
+import { invite } from '../config.js';
+---
+<div id="cover">
+  <div class="cover-in">
+    <div>
+      <p class="form-line"><span>Your</span><span>Presence is Requested</span></p>
+      <p class="form-line"><span>TO</span><span>celebrate</span></p>
+      <p class="form-line"><span>THE</span><span>wedding of</span></p>
+    </div>
+    <h1 class="cover-names">{invite.short}</h1>
+    <p class="cover-date">{invite.dateLabel}</p>
+    <div class="polaroid cover-photo"><img src={invite.coverPhoto} alt="Foto mempelai" /></div>
+    <br />
+    <button class="btn red" id="openBtn">Buka undangan</button>
+  </div>
+</div>
+<audio id="bgm" src="/audio/musik.mp3" loop></audio>
+
+<script>
+  const cover = document.getElementById('cover');
+  const bgm = document.getElementById('bgm');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('openBtn').addEventListener('click', () => {
+    cover.classList.add('open');
+    document.body.style.overflow = '';
+    bgm.play().catch(() => {});
+    setTimeout(() => cover.remove(), 950);
+  });
+</script>

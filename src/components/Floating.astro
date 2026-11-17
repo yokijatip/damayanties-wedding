@@ -1,0 +1,32 @@
+---
+---
+<div class="fabs">
+  <button class="fab" id="fTop" aria-label="Ke atas">↑</button>
+  <button class="fab" id="fScroll" aria-label="Gulir otomatis" aria-pressed="false">⇣</button>
+  <button class="fab" id="fMusic" aria-label="Musik" aria-pressed="true">♪</button>
+</div>
+
+<script>
+  const bgm = document.getElementById('bgm');
+  document.getElementById('fTop').addEventListener('click', () => scrollTo({ top: 0 }));
+
+  const fMusic = document.getElementById('fMusic');
+  fMusic.addEventListener('click', () => {
+    const on = fMusic.getAttribute('aria-pressed') === 'true';
+    if (on) bgm.pause(); else bgm.play().catch(() => {});
+    fMusic.setAttribute('aria-pressed', String(!on));
+  });
+
+  const fScroll = document.getElementById('fScroll');
+  let auto = null;
+  const stop = () => { clearInterval(auto); auto = null; fScroll.setAttribute('aria-pressed', 'false'); };
+  fScroll.addEventListener('click', () => {
+    if (auto) return stop();
+    fScroll.setAttribute('aria-pressed', 'true');
+    auto = setInterval(() => {
+      scrollBy(0, 1);
+      if (innerHeight + scrollY >= document.body.scrollHeight - 2) stop();
+    }, 16);
+  });
+  ['wheel', 'touchstart'].forEach((ev) => addEventListener(ev, () => auto && stop(), { passive: true }));
+</script>

@@ -1,0 +1,86 @@
+---
+---
+<section>
+  <h2>Ucapan &amp; konfirmasi</h2>
+  <p class="small">Mohon konfirmasi kehadiran dan tulis ucapan untuk kami.</p>
+
+  <form id="rsvp">
+    <label>Nama <input id="name" required maxlength="40" autocomplete="name" /></label>
+    <label>Kehadiran
+      <select id="att">
+        <option>Saya akan hadir</option>
+        <option>Maaf, belum bisa hadir</option>
+        <option>Masih ragu</option>
+      </select>
+    </label>
+    <label>Ucapan <textarea id="msg" required maxlength="300"></textarea></label>
+    <input id="hp" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+    <button class="btn red" type="submit">Kirim ucapan</button>
+    <p class="small" id="status" role="status"></p>
+  </form>
+
+  <div id="wishes"></div>
+  <button class="btn" id="more" style="margin-top:16px;display:none">Muat lebih banyak</button>
+</section>
+
+<script>
+  import { createClient } from '@supabase/supabase-js';
+
+  const url = import.meta.env.PUBLIC_SUPABASE_URL;
+  const key = import.meta.env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  const supabase = url && key ? createClient(url, key) : null;
+
+  const PAGE = 5;
+  let loaded = 0;
+  const list = document.getElementById('wishes');
+  const moreBtn = document.getElementById('more');
+  const statusEl = document.getElementById('status');
+
+  // dibuat dengan textContent supaya aman dari XSS
+  function card(w) {
+    const d = document.createElement('div');
+    d.className = 'wish';
+    const b = document.createElement('b'); b.textContent = w.name;
+    const m = document.createElement('span'); m.textContent = w.message;
+    const i = document.createElement('i'); i.textContent = w.attendance;
+    d.append(b, m, document.createElement('br'), i);
+    return d;
+  }
+
+  async function muat() {
+    moreBtn.disabled = true;
+    const { data, error } = await supabase
+      .from('wishes')
+      .select('name, attendance, message, created_at')
+      .order('created_at', { ascending: false })
+      .range(loaded, loaded + PAGE - 1);
+    moreBtn.disabled = false;
+    if (error) { statusEl.textContent = 'Gagal memuat ucapan.'; return; }
+    data.forEach((w) => list.append(card(w)));
+    loaded += data.length;
+    moreBtn.style.display = data.length === PAGE ? 'inline-block' : 'none';
+  }
+
+  if (!supabase) {
+    statusEl.textContent = 'Ucapan belum aktif (cek file .env, lalu restart npm run dev).';
+  } else {
+    muat();
+    moreBtn.addEventListener('click', muat);
+  }
+
+  document.getElementById('rsvp').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!supabase || document.getElementById('hp').value) return;
+    const w = {
+      name: document.getElementById('name').value.trim(),
+      attendance: document.getElementById('att').value,
+      message: document.getElementById('msg').value.trim()
+    };
+    const { error } = await supabase.from('wishes').insert(w);
+    if (error) { statusEl.textContent = 'Gagal mengirim, coba lagi.'; return; }
+    list.prepend(card(w));
+    loaded += 1;
+    e.target.reset();
+    statusEl.textContent = 'Terima kasih, ucapanmu terkirim!';
+  });
+</script>

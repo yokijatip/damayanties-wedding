@@ -1,0 +1,18 @@
+---
+import { invite } from '../config.js';
+const [bulan, tahun] = invite.monthYear.split(' ');
+---
+<section>
+  <div class="notebook">
+    <p class="small">Kami mengundang Anda<br />ke pernikahan kami</p>
+    <h2>{invite.bride}</h2>
+    <p class="small">{invite.brideParents}</p>
+    <p class="script" style="font-size:1.6rem">&amp;</p>
+    <h2>{invite.groom}</h2>
+    <p class="small">{invite.groomParents}</p>
+    <p style="margin:16px 0 8px">{bulan} <span class="heart">{invite.day}</span> {tahun}</p>
+    {invite.events.filter((e) => e.time).map((e) => (
+      <div class="row"><span>{e.title}</span><span>{e.time}</span></div>
+    ))}
+  </div>
+</section>

@@ -1,16 +1,28 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Cover from '../components/Cover.astro';
+import Intro from '../components/Intro.astro';
+import Couple from '../components/Couple.astro';
+import Countdown from '../components/Countdown.astro';
+import Venue from '../components/Venue.astro';
+import Gallery from '../components/Gallery.astro';
+import Gift from '../components/Gift.astro';
+import Wishes from '../components/Wishes.astro';
+import Thanks from '../components/Thanks.astro';
+import Floating from '../components/Floating.astro';
+import { invite } from '../config.js';
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title={`Undangan Pernikahan ${invite.short}`}>
+  <Cover />
+  <main class="wrap">
+    <Intro />
+    <Couple />
+    <Countdown />
+    <Venue />
+    <Gallery />
+    <Gift />
+    <Wishes />
+    <Thanks />
+  </main>
+  <Floating />
+</Layout>
