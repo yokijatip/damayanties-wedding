@@ -2,12 +2,12 @@
 import { invite } from '../config.js';
 ---
 <section>
-  <h2>Hadiah pernikahan</h2>
-  <p class="small">Doa restu Anda sudah cukup bagi kami. Bila ingin berbagi kebahagiaan, silakan melalui rekening berikut.</p>
+  <h2>Wedding Gift</h2>
+  <p class="small">Your blessings are the greatest gift to us. If you wish to express your gratitude with a gift, you may do so through the information below.</p>
   {invite.accounts.map((a) => (
     <div class="acct">
-      <div><b>{a.bank} · {a.number}</b><span class="small">a.n. {a.name}</span></div>
-      <button class="btn" data-copy={a.number}>Salin</button>
+      <div><b>{a.bank} · {a.number}</b><span class="small">Account holder: {a.name}</span></div>
+      <button class="btn" data-copy={a.number}>Copy</button>
     </div>
   ))}
 </section>
@@ -21,8 +21,8 @@ import { invite } from '../config.js';
   };
   document.querySelectorAll('[data-copy]').forEach((b) =>
     b.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(b.dataset.copy); toast('Nomor tersalin'); }
-      catch { toast('Gagal menyalin, salin manual'); }
+      try { await navigator.clipboard.writeText(b.dataset.copy); toast('Number copied'); }
+      catch { toast('Copy failed, please copy manually'); }
     })
   );
 </script>

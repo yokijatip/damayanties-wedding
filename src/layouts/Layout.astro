@@ -4,14 +4,14 @@ import { invite } from '../config.js';
 const { title } = Astro.props;
 ---
 <!doctype html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta property="og:type" content="website" />
     <meta property="og:title" content={`The Wedding of ${invite.short}`} />
-    <meta property="og:description" content={`Kami mengundang Anda ke pernikahan kami · ${invite.dateLabel}`} />
+    <meta property="og:description" content={`We invite you to our wedding · ${invite.dateLabel}`} />
     <meta property="og:image" content={`${invite.siteUrl}/og.jpg`} />
     <meta name="color-scheme" content="light only" />
     <meta name="supported-color-schemes" content="light" />

@@ -3,27 +3,27 @@ export const invite = {
   siteUrl: 'https://undangan-kamu.vercel.app', // ganti setelah deploy
 
   bride: 'Damayantie Nur Aisyah',
-  brideParents: 'Putri dari Bapa Eman Sudirman & Ibu Yani Suryani Nur',
+  brideParents: 'Daughter of Mr. Eman Sudirman & Mrs. Yani Suryani Nur',
   groom: 'Garzia Rizaldi',
-  groomParents: 'Putra dari Ayah R. Erzi Rizal & Bunda Helga Handarawati',
+  groomParents: 'Son of Mr. R. Erzi Rizal & Mrs. Helga Handarawati',
   short: 'Damayantie & Garzia',
 
   // dipakai countdown dan file kalender: jam akad 10.00 WIB
   dateISO: '2026-12-02T10:00:00+07:00',
-  dateLabel: '02.12.26',
-  monthYear: 'Desember 2026',
+  dateLabel: '2 December 2026',
+  monthYear: 'December 2026',
   day: '02',
 
   events: [
     {
-      title: 'Akad nikah',
+      title: 'Wedding Ceremony',
       time: '10.00 WIB',
-      place: 'KUA',
+      place: 'KUA (Office of Religious Affairs)',
       address: '', // isi nama/alamat KUA
       mapsUrl: '' // isi link Google Maps KUA (kosongkan kalau tidak ada)
     },
     {
-      title: 'Makan-makan',
+      title: 'Reception',
       time: '', // isi jamnya, misalnya '12.00 WIB'
       place: 'Lalana Space',
       address: '', // isi alamat Lalana Space

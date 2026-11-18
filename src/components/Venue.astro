@@ -2,14 +2,14 @@
 import { invite } from '../config.js';
 ---
 <section>
-  <h2>Lokasi acara</h2>
+  <h2>Event Location</h2>
   {invite.events.map((e) => (
     <div style="margin-top:26px">
       <p class="small">{e.title}{e.time ? ` · ${e.time}` : ''}</p>
       <p style="margin:4px 0 2px"><b>{e.place}</b></p>
       {e.address && <p class="small">{e.address}</p>}
       {e.mapsUrl && (
-        <a class="btn" style="margin-top:12px" href={e.mapsUrl} target="_blank" rel="noopener">Buka di Google Maps</a>
+        <a class="btn" style="margin-top:12px" href={e.mapsUrl} target="_blank" rel="noopener">Open in Google Maps</a>
       )}
     </div>
   ))}
